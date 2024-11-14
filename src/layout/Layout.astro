@@ -1,4 +1,5 @@
 ---
+import Navigation from '@/components/Navigation.astro'
 import '@/styles/globals.css'
 ---
 
@@ -17,6 +18,17 @@ import '@/styles/globals.css'
     />
   </head>
   <body>
-    <slot />
+    <div class="container">
+      <Navigation />
+      <slot />
+    </div>
   </body>
 </html>
+
+<style>
+  .container {
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 20% 1fr;
+  }
+</style>

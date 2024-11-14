@@ -20,6 +20,8 @@ html {
 }
 
 body {
+  height: 100dvh;
+
   background-image:
     linear-gradient(
       135deg,

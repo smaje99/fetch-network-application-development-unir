@@ -1,0 +1,48 @@
+<nav>
+  <h2>Ejercicios</h2>
+  <ul>
+    <li><a href="/#palindromo">Palíndromo</a></li>
+    <li><a href="/#numero-mayor">Número mayor</a></li>
+    <li><a href="/#vocales">Vocales</a></li>
+    <li><a href="/#numero-vocales">Número de vocales</a></li>
+    <li><a href="/#peticion-fecth">Petición fetch</a></li>
+  </ul>
+</nav>
+
+<style>
+  nav {
+    display: inline-block;
+    padding-inline-start: 20px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 1rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--blue-chill-500);
+
+    &:hover {
+      font-weight: bold;
+      color: var(--blue-chill-700);
+
+      &::before {
+        content: '';
+      }
+
+      &::after {
+        content: ' 🚀';
+      }
+    }
+
+    &::before {
+      content: '🔗 ';
+    }
+  }
+</style>

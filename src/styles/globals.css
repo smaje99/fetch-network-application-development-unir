@@ -1,0 +1,83 @@
+@import url('./reset.css') layer(reset);
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+  --blue-chill-50: #f2f9f9;
+  --blue-chill-100: #ddeff0;
+  --blue-chill-200: #bfe0e2;
+  --blue-chill-300: #92cace;
+  --blue-chill-400: #5faab1;
+  --blue-chill-500: #438e96;
+  --blue-chill-600: #3b757f;
+  --blue-chill-700: #356169;
+  --blue-chill-800: #325158;
+  --blue-chill-900: #2d464c;
+  --blue-chill-950: #1a2c32;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  background-image:
+    linear-gradient(
+      135deg,
+      var(--blue-chill-50),
+      var(--blue-chill-100),
+      var(--blue-chill-200)
+    );
+  background-repeat: no-repeat;
+
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--blue-chill-600);
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--blue-chill-200);
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  text-wrap: pretty;
+}
+
+p {
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: 2.5rem; /* 40px */
+}
+
+h2 {
+  font-size: 2rem; /* 32px */
+}
+
+h3 {
+  font-size: 1.75rem; /* 28px */
+}
+
+h4 {
+  font-size: 1.5rem; /* 24px */
+}
+
+h5 {
+  font-size: 1.25rem; /* 20px */
+}
+
+small {
+  font-size: 0.75rem; /* 12px */
+}

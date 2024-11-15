@@ -1,0 +1,21 @@
+<div class="card">
+  <slot />
+</div>
+
+<style>
+  .card {
+    width: 70%;
+    padding: 16px;
+    margin-inline: auto;
+
+    border: 1px solid var(--blue-chill-200);
+    border-radius: 12px;
+
+    color: var(--blue-chill-50);
+    background-color: var(--blue-chill-950);
+
+    box-shadow:
+      0 1px 3px 0 rgb(0 0 0 / 0.1),
+      0 1px 2px -1px rgba(0 0 0 / 0.1);
+  }
+</style>

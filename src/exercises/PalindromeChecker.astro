@@ -1,0 +1,87 @@
+---
+import Button from "@/components/Button.astro";
+import Card from "@/components/card/Card.astro";
+import CardContent from "@/components/card/CardContent.astro";
+import CardDescription from "@/components/card/CardDescription.astro";
+import CardFooter from "@/components/card/CardFooter.astro";
+import CardHeader from "@/components/card/CardHeader.astro";
+import CardTitle from "@/components/card/CardTitle.astro";
+import ExerciseContainer from "@/components/ExerciseContainer.astro";
+import Input from "@/components/Input.astro";
+import Result from "@/components/Result.astro";
+---
+
+<ExerciseContainer id="palindromo">
+  <Card>
+    <CardHeader>
+      <CardTitle>Comprobador de Palíndromos</CardTitle>
+      <CardDescription
+        >Introduce una palabra para comprobar si es un palíndromo.</CardDescription
+      >
+    </CardHeader>
+    <CardContent>
+      <form id="palindromeForm">
+        <Input
+          name="palindrome"
+          placeholder="Introduce una palabra"
+          aria-label="Palabra a comprobar"
+        />
+        <div class="controls">
+          <Button type="submit">Comprobar</Button>
+          <Button type="reset" variant="outline">Reiniciar</Button>
+        </div>
+      </form>
+    </CardContent>
+    <CardFooter>
+      <Result id="palindromeResult" />
+    </CardFooter>
+  </Card>
+</ExerciseContainer>
+
+<script>
+  const formElement = document.getElementById("palindromeForm");
+  const resultElement = document.getElementById("palindromeResult");
+
+  function isPalindrome(str: string): boolean {
+    const cleanStr = str.toLowerCase().replace(/[^a-z0-9]/g, "");
+    const reversedStr = cleanStr.split("").reverse().join("");
+    return cleanStr === reversedStr;
+  }
+
+  formElement?.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target as HTMLFormElement);
+    const palindrome = (formData.get("palindrome") as string).trim();
+
+    console.log(formData, palindrome);
+
+    const result =
+      palindrome === ""
+        ? "Por favor, introduce una palabra."
+        : isPalindrome(palindrome)
+          ? "¡Es un palíndromo!"
+          : "No es un palíndromo.";
+
+    if (resultElement) {
+      resultElement.textContent = result;
+    }
+  });
+
+  formElement?.addEventListener("reset", () => {
+    if (resultElement) {
+      resultElement.textContent = "";
+    }
+  });
+</script>
+
+<style>
+  .controls {
+    display: flex;
+    gap: 8px;
+
+    > * {
+      flex: 1;
+    }
+  }
+</style>

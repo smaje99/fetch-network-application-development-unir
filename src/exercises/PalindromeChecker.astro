@@ -25,6 +25,7 @@ import Result from "@/components/Result.astro";
           name="palindrome"
           placeholder="Introduce una palabra"
           aria-label="Palabra a comprobar"
+          required
         />
         <div class="controls">
           <Button type="submit">Comprobar</Button>
@@ -54,14 +55,9 @@ import Result from "@/components/Result.astro";
     const formData = new FormData(event.target as HTMLFormElement);
     const palindrome = (formData.get("palindrome") as string).trim();
 
-    console.log(formData, palindrome);
-
-    const result =
-      palindrome === ""
-        ? "Por favor, introduce una palabra."
-        : isPalindrome(palindrome)
-          ? "¡Es un palíndromo!"
-          : "No es un palíndromo.";
+    const result = isPalindrome(palindrome)
+      ? "¡Es un palíndromo!"
+      : "No es un palíndromo.";
 
     if (resultElement) {
       resultElement.textContent = result;

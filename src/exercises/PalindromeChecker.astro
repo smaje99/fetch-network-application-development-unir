@@ -56,8 +56,8 @@ import Result from "@/components/Result.astro";
     const palindrome = (formData.get("palindrome") as string).trim();
 
     const result = isPalindrome(palindrome)
-      ? "¡Es un palíndromo!"
-      : "No es un palíndromo.";
+      ? `La palabra "${palindrome}" es un palíndromo.`
+      : `La palabra "${palindrome}" no es un palíndromo.`;
 
     if (resultElement) {
       resultElement.textContent = result;

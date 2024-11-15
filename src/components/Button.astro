@@ -1,0 +1,75 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"button"> {
+  readonly type?: "button" | "submit" | "reset";
+  readonly variant?: "flat" | "outline";
+}
+
+const { variant = "flat", ...props } = Astro.props;
+---
+
+<button data-variant={variant} {...props}>
+  <slot />
+</button>
+
+<style>
+  button {
+    font-size: 14px;
+    font-weight: 500;
+
+    padding: 8px 16px;
+    border-radius: 6px;
+
+    transition-property: background-color, color, border-color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+
+    &:disabled {
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    &[data-variant="flat"] {
+      color: var(--blue-chill-50);
+      background-color: var(--blue-chill-500);
+      border: none;
+
+      &:hover {
+        background-color: var(--blue-chill-600);
+      }
+
+      &:active {
+        background-color: var(--blue-chill-700);
+      }
+
+      &:disabled {
+        color: var(--blue-chill-400);
+        background-color: var(--blue-chill-100);
+      }
+    }
+
+    &[data-variant="outline"] {
+      color: var(--blue-chill-500);
+      background-color: var(--blue-chill-50);
+      border: 1px solid var(--blue-chill-500);
+
+      &:hover {
+        color: var(--blue-chill-600);
+        border-color: var(--blue-chill-600);
+        background-color: var(--blue-chill-200);
+      }
+
+      &:active {
+        color: var(--blue-chill-700);
+        border-color: var(--blue-chill-700);
+        background-color: var(--blue-chill-300);
+      }
+
+      &:disabled {
+        color: var(--blue-chill-200);
+        border-color: var(--blue-chill-200);
+      }
+    }
+  }
+</style>

@@ -1,0 +1,86 @@
+---
+import Button from "@/components/Button.astro";
+import Card from "@/components/card/Card.astro";
+import CardContent from "@/components/card/CardContent.astro";
+import CardDescription from "@/components/card/CardDescription.astro";
+import CardFooter from "@/components/card/CardFooter.astro";
+import CardHeader from "@/components/card/CardHeader.astro";
+import CardTitle from "@/components/card/CardTitle.astro";
+import ExerciseContainer from "@/components/ExerciseContainer.astro";
+import Input from "@/components/Input.astro";
+import Result from "@/components/Result.astro";
+
+// 3.	Escribe un programa que pida una frase y escriba las vocales que aparecen.
+---
+
+<ExerciseContainer id="vocales">
+  <Card>
+    <CardHeader>
+      <CardTitle>Comprobador de Vocales</CardTitle>
+      <CardDescription>
+        Introduce una frase para comprobar las vocales que aparecen.
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <form id="vowelsForm">
+        <Input
+          name="vowels"
+          placeholder="Introduce una frase"
+          aria-label="Frase a comprobar"
+          required
+        />
+        <div class="controls">
+          <Button type="submit">Comprobar</Button>
+          <Button type="reset" variant="outline">Reiniciar</Button>
+        </div>
+      </form>
+    </CardContent>
+    <CardFooter>
+      <Result id="vowelsResult" />
+    </CardFooter>
+  </Card>
+</ExerciseContainer>
+
+<script>
+  const formElement = document.getElementById("vowelsForm");
+  const resultElement = document.getElementById("vowelsResult");
+
+  const vowels = /[aeiouáéíóúü]/gi;
+
+  function getVowels(text: string): string {
+    const matches = text.match(vowels);
+    return matches
+      ? Array.from(new Set(matches)).join(", ")
+      : "No se encontraron vocales.";
+  }
+
+  formElement?.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target as HTMLFormElement);
+    const vowels = formData.get("vowels") as string;
+
+    const result = `Las vocales que aparecen son: ${getVowels(vowels)}`;
+
+    if (resultElement) {
+      resultElement.textContent = result;
+    }
+  });
+
+  formElement?.addEventListener("reset", () => {
+    if (resultElement) {
+      resultElement.textContent = "";
+    }
+  });
+</script>
+
+<style>
+  .controls {
+    display: flex;
+    gap: 8px;
+
+    > * {
+      flex: 1;
+    }
+  }
+</style>

@@ -1,0 +1,16 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface ResultProps extends HTMLAttributes<'p'> {
+}
+
+const { ...props } = Astro.props;
+---
+
+<p {...props} class="result" role="status" aria-live="polite"></p>
+
+<style>
+  .result {
+    height: 24px;
+  }
+</style>

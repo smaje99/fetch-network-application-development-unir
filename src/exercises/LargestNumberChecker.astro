@@ -1,0 +1,89 @@
+---
+import Button from "@/components/Button.astro";
+import Card from "@/components/card/Card.astro";
+import CardContent from "@/components/card/CardContent.astro";
+import CardDescription from "@/components/card/CardDescription.astro";
+import CardFooter from "@/components/card/CardFooter.astro";
+import CardHeader from "@/components/card/CardHeader.astro";
+import CardTitle from "@/components/card/CardTitle.astro";
+import ExerciseContainer from "@/components/ExerciseContainer.astro";
+import Input from "@/components/Input.astro";
+import Result from "@/components/Result.astro";
+---
+
+<ExerciseContainer id="numero-mayor">
+  <Card>
+    <CardHeader>
+      <CardTitle>Comprobador del número mayor</CardTitle>
+      <CardDescription>
+        Introduce dos números y comprueba cuál es el mayor.
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <form id="largestNumberForm">
+        <Input
+          type="number"
+          name="number1"
+          placeholder="Introduce un número"
+          aria-label="Número 1 a comprobar"
+          required
+        />
+        <Input
+          type="number"
+          name="number2"
+          placeholder="Introduce un número"
+          aria-label="Número 2 a comprobar"
+          required
+        />
+        <div class="controls">
+          <Button type="submit">Comprobar</Button>
+          <Button type="reset" variant="outline">Reiniciar</Button>
+        </div>
+      </form>
+    </CardContent>
+    <CardFooter>
+      <Result id="largestNumberResult" />
+    </CardFooter>
+  </Card>
+</ExerciseContainer>
+
+<script>
+  const formElement = document.getElementById("largestNumberForm");
+  const resultElement = document.getElementById("largestNumberResult");
+
+  function getLargestNumber(number1: number, number2: number): number {
+    return Math.max(number1, number2);
+  }
+
+  formElement?.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target as HTMLFormElement);
+    const number1 = Number(formData.get("number1"));
+    const number2 = Number(formData.get("number2"));
+
+    const largestNumber = getLargestNumber(number1, number2);
+    const result = `El número mayor es: ${largestNumber}`;
+
+    if (resultElement) {
+      resultElement.textContent = result;
+    }
+  });
+
+  formElement?.addEventListener("reset", () => {
+    if (resultElement) {
+      resultElement.textContent = "";
+    }
+  });
+</script>
+
+<style>
+  .controls {
+    display: flex;
+    gap: 8px;
+
+    > * {
+      flex: 1;
+    }
+  }
+</style>

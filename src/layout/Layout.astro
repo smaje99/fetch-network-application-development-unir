@@ -18,17 +18,15 @@ import '@/styles/globals.css'
     />
   </head>
   <body>
-    <div class="container">
-      <Navigation />
+    <Navigation />
+    <main class="container">
       <slot />
-    </div>
+    </main>
   </body>
 </html>
 
 <style>
   .container {
-    width: 100vw;
-    display: grid;
-    grid-template-columns: 20% 1fr;
+    margin-left: 280px;
   }
 </style>

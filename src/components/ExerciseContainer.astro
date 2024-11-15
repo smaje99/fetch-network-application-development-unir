@@ -1,0 +1,32 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'section'> {
+}
+
+const { ...props } = Astro.props;
+---
+
+<section class="container" {...props}>
+  <slot />
+</section>
+
+<style>
+  .container {
+    width: 100%;
+    height: max(100vh, 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 64px;
+
+    form > * + * {
+      margin-top: 16px;
+    }
+
+    form > button {
+      width: 100%;
+    }
+  }
+</style>

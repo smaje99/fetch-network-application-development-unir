@@ -1,0 +1,96 @@
+---
+import Button from "@/components/Button.astro";
+import Card from "@/components/card/Card.astro";
+import CardContent from "@/components/card/CardContent.astro";
+import CardDescription from "@/components/card/CardDescription.astro";
+import CardFooter from "@/components/card/CardFooter.astro";
+import CardHeader from "@/components/card/CardHeader.astro";
+import CardTitle from "@/components/card/CardTitle.astro";
+import ExerciseContainer from "@/components/ExerciseContainer.astro";
+import Input from "@/components/Input.astro";
+import Result from "@/components/Result.astro";
+
+// 4.	Escribe un programa que pida una frase y escriba cuántas veces aparecen cada una de las vocales.
+---
+
+<ExerciseContainer id="numero-vocales">
+  <Card>
+    <CardHeader>
+      <CardTitle>Contador de Vocales</CardTitle>
+      <CardDescription>
+        Introduce una frase para contar las vocales que aparecen.
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <form id="countVowelsForm">
+        <Input
+          name="countVowels"
+          placeholder="Introduce una frase"
+          aria-label="Frase a comprobar"
+          required
+        />
+        <div class="controls">
+          <Button type="submit">Comprobar</Button>
+          <Button type="reset" variant="outline">Reiniciar</Button>
+        </div>
+      </form>
+    </CardContent>
+    <CardFooter>
+      <Result id="countVowelsResult" />
+    </CardFooter>
+  </Card>
+</ExerciseContainer>
+
+<script>
+  const formElement = document.getElementById("countVowelsForm");
+  const resultElement = document.getElementById("countVowelsResult");
+
+  const vowels = /[aeiouáéíóúü]/gi;
+
+  function getCountVowels(str: string): string {
+    const matches = str.match(vowels);
+
+    if (!matches) {
+      return "No se encontraron vocales en la frase.";
+    }
+
+    const count = matches.reduce((acc, match) => {
+      acc[match] = (acc[match] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+
+    return Object.entries(count)
+      .map(([vowel, count]) => `${vowel}: ${count}`)
+      .join(", ");
+  }
+
+  formElement?.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target as HTMLFormElement);
+    const countVowels = formData.get("countVowels") as string;
+
+    const result = `Las vocales que aparecen son: ${getCountVowels(countVowels)}`;
+
+    if (resultElement) {
+      resultElement.textContent = result;
+    }
+  });
+
+  formElement?.addEventListener("reset", () => {
+    if (resultElement) {
+      resultElement.textContent = "";
+    }
+  });
+</script>
+
+<style>
+  .controls {
+    display: flex;
+    gap: 8px;
+
+    > * {
+      flex: 1;
+    }
+  }
+</style>

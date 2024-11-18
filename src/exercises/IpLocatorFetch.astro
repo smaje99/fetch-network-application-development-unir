@@ -103,12 +103,8 @@ import ExerciseContainer from "@/components/ExerciseContainer.astro";
     try {
       const response = await fetch("https://ip.guide");
 
-      statusCodeElement.classList.remove("skeleton");
-
       if (!response.ok) {
-        throw new Error(
-          `<strong>Error ${response.status}:</strong> ${response.statusText}`
-        );
+        throw new Error("Error al cargar la información");
       }
 
       const data: IpInfo = await response.json();
@@ -122,10 +118,10 @@ import ExerciseContainer from "@/components/ExerciseContainer.astro";
         null,
         2
       );
-    } catch (error) {
-      statusSpan.textContent = "Error al cargar la información";
-    } finally {
       statusSpan.textContent = "Carga completada";
+    } catch (error) {
+      statusSpan.textContent = (error as Error).message;
+    } finally {
       button.disabled = false;
       button.textContent = "Actualizar localización";
       ipInfoElements.forEach((element) => element.classList.remove("skeleton"));
